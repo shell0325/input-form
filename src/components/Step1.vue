@@ -6,17 +6,22 @@
         <h2 class="title">お客様の情報を入力してください</h2>
       </div>
       <p id="seibetu">-性別-</p>
-      <input type="radio" id="man" value="man" />
+      <input type="radio" id="man" value="man" name="seibetu"/>
       <label for="man">男性</label>
-      <input type="radio" id="woman" value="woman" />
+      <input type="radio" id="woman" value="woman" name="seibetu"/>
       <label for="woman">女性</label>
       <p>生年月日</p>
       <div id="selectDate">
         <select v-model="year" @change="get_days">
-          <option v-for="n in 50" :value="n + 1980" :key="n + 1980">
-            {{ n + 1980 }}
-          </option></select
-        >年
+          <option
+            v-for="nengo in nengoes"
+            :key="nengo.year"
+            :value="nengo.year"
+          >
+            {{ nengo.label }}
+          </option>
+        </select>
+
         <select v-model="month" @change="get_days">
           <option v-for="n in 12" :value="n" :key="n">
             {{ n }}
@@ -30,26 +35,34 @@
       </div>
     </div>
     <button id="next-page" @click="toStep2">次へ進む></button>
-  <router-view></router-view>
+    <router-view></router-view>
   </div>
 </template>
 
  <script>
+import common from "../helpers/definition";
 export default {
   data() {
     return {
       year: 2018,
       month: 1,
       day: 1,
+      nengoes: [],
       days_max: "1",
     };
   },
+  mounted() {
+    this.nengoes = common.genereate();
+  },
   methods: {
-    toStep2(){
-      this.$router.push('Step2')
+    toStep2() {//Step2へのルーター
+      this.$router.push("Step2");
     },
-    get_days() {
-      this.days_max = new Date(this.year, this.month, 0).getDate();
+    get_days() {//月の最大日数を取得
+      this.days_max = common.get_days(this.year, this.month);
+    },
+    genereate() {//外部jsを参照
+      this.nengoes = common.genereate();
     },
   },
 };

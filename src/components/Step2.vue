@@ -44,13 +44,10 @@ export default {
     }
   },
   methods:{
-    // Show2(){
-    //   this.show2 = !this.show2
-    // },
-    toStep3(){
+    toStep3(){//Step3へのルーター
       this.$router.push('Step3')
     },
-    toStep1(){
+    toStep1(){//Step1へのルーター
       this.$router.push('/')
     },
   }

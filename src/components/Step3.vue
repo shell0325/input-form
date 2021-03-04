@@ -17,7 +17,7 @@
 <script>
 export default {
   methods:{
-    toStep2(){
+    toStep2(){//Step2へのルーター
       this.$router.push('Step2')
     }
   }
