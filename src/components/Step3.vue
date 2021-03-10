@@ -6,10 +6,10 @@
         <h2 class="title">ご相談内容をご記入ください</h2>
       </div>
       <p class="soudan">-ご相談内容-</p>
-      <textarea id="textarea" cols="90" rows="20"></textarea>
+      <textarea id="textarea" cols="90" rows="20" v-model="textarea"></textarea>
     </div>
     <button id="next-page" @click="toStep2">前へ戻る></button>
-    <button id="next-page">次へ進む></button>
+    <button id="next-page" @click="toConclusion">次へ進む></button>
   <router-view></router-view>
   </div>
 </template>
@@ -19,6 +19,19 @@ export default {
   methods:{
     toStep2(){//Step2へのルーター
       this.$router.push('Step2')
+    },
+    toConclusion(){
+      this.$router.push('conclusion')
+    }
+  },
+  computed:{
+    textarea:{
+      get(){
+        return this.$store.state.textarea;
+      },
+      set(textarea){
+        this.$store.commit('settextarea',textarea);
+      }
     }
   }
 };
