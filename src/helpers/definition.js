@@ -1,7 +1,9 @@
-function get_days(year, month) {//月の最大に数を取得
+function get_days(year, month) {
+  //月の最大に数を取得
   return new Date(year, month, 0).getDate();
 }
-function genereate() {//西暦を設定
+function genereate() {
+  //西暦を設定
   const nengoes = [];
   for (let y = 2030; y > 1980; y--) {
     if (y > 2018) {
