@@ -6,26 +6,26 @@
         <h2 class="title">以下にお答えください</h2>
       </div>
       <p>現在、生命保険に加入されていますか？</p>
-      <input type="radio" @click="show2 = true" name="question1" />
+      <input type="radio" @click="show2 = true" name="question1" v-model="question1" value="はい"/>
       <label for="yes">はい</label>
-      <input type="radio" @click="show2 = true" name="question1" />
+      <input type="radio" @click="show2 = true" name="question1" v-model="question1" value="いいえ"/>
       <label for="no">いいえ</label>
       <div style="display: none" v-show="show2">
         <p>
           現在入院中ですか？または、最近３ヶ月以内に医師の診察・検査の結果、入院・手術を勧められたことはありますか？
         </p>
-        <input type="radio" name="question2" @click="show3 = true">
+        <input type="radio" name="question2" @click="show3 = true" v-model="question2" value="はい">
         <label for="yes">はい</label>
-        <input type="radio" name="question2" @click="show3 = true">
+        <input type="radio" name="question2" @click="show3 = true" v-model="question2" value="いいえ">
         <label for="no">いいえ</label>
       </div>
       <div style="display: none" v-show="show3">
         <p>
           過去５年以内に、病気や怪我で、手術を受けたことまたは継続して７日以上の入院をしたことはありますか？
         </p>
-        <input type="radio" name="question3">
+        <input type="radio" name="question3" v-model="question3" value="はい">
         <label for="yes">はい</label>
-        <input type="radio" name="question3">
+        <input type="radio" name="question3" v-model="question3" value="いいえ">
         <label for="no">いいえ</label>
       </div>
     </div>
@@ -43,14 +43,37 @@ export default {
       show3:false,
     }
   },
+  computed:{
+    question1:{
+      get(){
+        return this.$store.state.queation1;
+      },
+      set(value){
+        this.$store.commit('setquestion1',value);
+      }
+    },
+    question2:{
+      get(){
+        return this.$store.state.question2;
+      },
+      set(value){
+        this.$store.commit('setquestion2',value);
+      }
+    },
+    question3:{
+      get(){
+        return this.$store.state.question3;
+      },
+      set(value){
+        this.$store.commit('setquestion3',value);
+      }
+    }
+  },
   methods:{
-    // Show2(){
-    //   this.show2 = !this.show2
-    // },
-    toStep3(){
+    toStep3(){//Step3へのルーター
       this.$router.push('Step3')
     },
-    toStep1(){
+    toStep1(){//Step1へのルーター
       this.$router.push('/')
     },
   }

@@ -6,17 +6,22 @@
         <h2 class="title">お客様の情報を入力してください</h2>
       </div>
       <p id="seibetu">-性別-</p>
-      <input type="radio" id="man" value="man" />
+      <input type="radio" id="man" value="男性" name="seibetu" v-model="picked"/>
       <label for="man">男性</label>
-      <input type="radio" id="woman" value="woman" />
+      <input type="radio" id="woman" value="女性" name="seibetu" v-model="picked"/>
       <label for="woman">女性</label>
       <p>生年月日</p>
-      <div id="selectDate">
+      <form>
         <select v-model="year" @change="get_days">
-          <option v-for="n in 50" :value="n + 1980" :key="n + 1980">
-            {{ n + 1980 }}
-          </option></select
-        >年
+          <option
+            v-for="nengo in nengoes"
+            :key="nengo.year"
+            :value="nengo.year"
+          >
+            {{ nengo.label }}
+          </option>
+        </select>
+
         <select v-model="month" @change="get_days">
           <option v-for="n in 12" :value="n" :key="n">
             {{ n }}
@@ -27,35 +32,74 @@
             {{ n }}
           </option></select
         >日
-      </div>
+      </form>
     </div>
     <button id="next-page" @click="toStep2">次へ進む></button>
-  <router-view></router-view>
+    <router-view></router-view>
   </div>
 </template>
 
  <script>
+import common from "../helpers/definition";
 export default {
   data() {
     return {
-      year: 2018,
-      month: 1,
-      day: 1,
+      nengoes: [],
       days_max: "1",
     };
   },
-  methods: {
-    toStep2(){
-      this.$router.push('Step2')
+  computed:{
+    picked:{
+      get(){
+        return this.$store.state.picked
+      },
+      set(value) {
+        this.$store.commit('setpicked', value);
+      },
     },
-    get_days() {
-      this.days_max = new Date(this.year, this.month, 0).getDate();
+    year:{
+      get(){
+        return this.$store.state.year
+      },
+      set(year){
+        this.$store.commit('setyear',year);
+      }
+    },
+    month:{
+      get(){
+        return this.$store.state.month
+      },
+      set(month){
+        this.$store.commit('setmonth',month);
+      }
+    },
+    day:{
+      get(){
+        return this.$store.state.day
+      },
+      set(day){
+        this.$store.commit('setday',day);
+      }
+    },
+  },
+  mounted() {
+    this.nengoes = common.genereate();
+  },
+  methods: {
+    toStep2() {//Step2へのルーター
+      this.$router.push("Step2");
+    },
+    get_days() {//月の最大日数を取得
+      this.days_max = common.get_days(this.year, this.month);
+    },
+    genereate() {//外部jsを参照
+      this.nengoes = common.genereate();
     },
   },
 };
 </script>
 
-<style scoped>
+<style>
 .box {
   border: 1px solid blue;
   width: 700px;

@@ -8,9 +8,9 @@ export default new Vuex.Store({
     picked: "",
     year: "2018",
     month: "1",
-    day:"1",
-    question1:"",
-    question2:"",
+    day: "1",
+    question1: "",
+    question2: "",
     question3: "",
     textarea: "",
   },
@@ -27,16 +27,16 @@ export default new Vuex.Store({
     setday(state, day) {
       state.day = day;
     },
-    setquestion1(state,question1) {
+    setquestion1(state, question1) {
       state.question1 = question1;
     },
-    setquestion2(state,question2) {
+    setquestion2(state, question2) {
       state.question2 = question2;
     },
-    setquestion3(state,question3) {
+    setquestion3(state, question3) {
       state.question3 = question3;
     },
-    settextarea(state,textarea) {
+    settextarea(state, textarea) {
       state.textarea = textarea;
     },
   },
