@@ -44,10 +44,17 @@ import common from "../helpers/definition";
 export default {
   data() {
     return {
+<<<<<<< HEAD
+=======
+      year: 2018,
+      month: 1,
+      day: 1,
+>>>>>>> master
       nengoes: [],
       days_max: "1",
     };
   },
+<<<<<<< HEAD
   computed:{
     picked:{
       get(){
@@ -82,6 +89,8 @@ export default {
       }
     },
   },
+=======
+>>>>>>> master
   mounted() {
     this.nengoes = common.genereate();
   },
